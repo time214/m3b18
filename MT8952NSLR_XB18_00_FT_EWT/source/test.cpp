@@ -11,8 +11,8 @@
 #include "stdafx.h"
 #include "math.h"
 #define SITENUM	4
-#define MT3552NSLR
-//#define MT8952NSLR
+////#define MT3552NSLR
+#define MT8952NSLR
 
 short DebugConsole[SITENUM] = { 1, 0, 0, 0 }, site = 0, flag[SITENUM] = { 0, 0, 0, 0 };
 double adresult[SITENUM] = { 0.0f };
@@ -1120,7 +1120,7 @@ DUT_API int OVP(short funcindex, LPCTSTR funclabel)	{
  	delay_ms(1);
 	FreshSiteFlagInit();
 
-	rlyC.SetOn(VinFPVI, ENFOVI, FbFOVI, CBSTSW, CapVIN, -1);
+	rlyC.SetOn(VinFPVI, ENFOVI, FbFOVI, CBSTSW, /*CapVIN,*/ -1);
 	delay_ms(2);
 	
 	// VIN RAMP UP 12V
@@ -1153,7 +1153,7 @@ DUT_API int OVP(short funcindex, LPCTSTR funclabel)	{
 
 			//if(DebugConsole[site])	fprintf(stderr, "V_S%d	: %3.4f	I_S%d	:%3.4f\n", site+1, vf, site+1, ICC[site]*1e6);
 			//if( (ICC[site] < float(500e-6f))&&flag[site]==0)	{			// 500uA
-			if( (ICC[site] < float(600e-6f))&&flag[site]==0)	{			// 600uA(#2)
+			if( (ICC[site] < float(700e-6f))&&flag[site]==0)	{			// 600uA(#2)
 				OVP_ON[site] = VinFPVI0.GetMeasResult(site, MVRET);
 				flag[site] = 1;
 			}
