@@ -404,29 +404,29 @@ DUT_API int HSide(short funcindex, LPCTSTR funclabel)	{
 // ****************************************** LSMOS ******************************************
 // ****************************************** LSMOS ******************************************
 // ****************************************** LSMOS ******************************************
-DUT_API int LSide(short funcindex, LPCTSTR funclabel)	{
-	//{{AFX_STS_PARAM_PROTOTYPES
-    CParam *RDSON = StsGetParam(funcindex,"RDSON");
-    CParam *I_TEST = StsGetParam(funcindex,"I_TEST");
-    CParam *IVALLY0 = StsGetParam(funcindex,"IVALLY0");
-    CParam *RATIO = StsGetParam(funcindex,"RATIO");
-    CParam *CurrentLimit = StsGetParam(funcindex,"CurrentLimit");
-    CParam *IZX = StsGetParam(funcindex,"IZX");
-    CParam *INEG = StsGetParam(funcindex,"INEG");
-	//}}AFX_STS_PARAM_PROTOTYPES
+//DEL DUT_API int LSide(short funcindex, LPCTSTR funclabel)	{
+//DEL 	//{{AFX_STS_PARAM_PROTOTYPES
+//DEL     CParam *RDSON = StsGetParam(funcindex,"RDSON");
+//DEL     CParam *I_TEST = StsGetParam(funcindex,"I_TEST");
+//DEL     CParam *IVALLY0 = StsGetParam(funcindex,"IVALLY0");
+//DEL     CParam *RATIO = StsGetParam(funcindex,"RATIO");
+//DEL     CParam *CurrentLimit = StsGetParam(funcindex,"CurrentLimit");
+//DEL     CParam *IZX = StsGetParam(funcindex,"IZX");
+//DEL     CParam *INEG = StsGetParam(funcindex,"INEG");
+//DEL 	//}}AFX_STS_PARAM_PROTOTYPES
  
-	return 0;
-}
-// test6
-// ****************************************** Switching1 ******************************************
-// ****************************************** Switching1 ******************************************
-// ****************************************** Switching1 ******************************************
+//DEL 	return 0;
+//DEL }
+//DEL // test6
+//DEL // ****************************************** Switching1 ******************************************
+//DEL // ****************************************** Switching1 ******************************************
+//DEL // ****************************************** Switching1 ******************************************
 DUT_API int Switching1(short funcindex, LPCTSTR funclabel)	{
   //{{AFX_STS_PARAM_PROTOTYPES
-  CParam *SwitchingFrquency = StsGetParam(funcindex,"SwitchingFrquency");
-  CParam *HSOnTime = StsGetParam(funcindex,"HSOnTime");
-  CParam *MinOffTime = StsGetParam(funcindex,"MinOffTime");
-  CParam *MaxDuty = StsGetParam(funcindex,"MaxDuty");
+    CParam *SwitchingFrquency = StsGetParam(funcindex,"SwitchingFrquency");
+    CParam *HSOnTime = StsGetParam(funcindex,"HSOnTime");
+    CParam *MinOffTime = StsGetParam(funcindex,"MinOffTime");
+    CParam *MaxDuty = StsGetParam(funcindex,"MaxDuty");
   //}}AFX_STS_PARAM_PROTOTYPES
 	double Ton[SITENUM] = { 0.0 }, Toff[SITENUM] = { 0.0 }, Duty[SITENUM] = { 0.0 }, Fsw[SITENUM] = { 0.0 };
 
@@ -660,7 +660,7 @@ DUT_API int Switching1(short funcindex, LPCTSTR funclabel)	{
 // ****************************************** RegulatorV ******************************************
 DUT_API int RegulatorV(short funcindex, LPCTSTR funclabel)	{
 	//{{AFX_STS_PARAM_PROTOTYPES
-  CParam *ReferenceVoltage = StsGetParam(funcindex,"ReferenceVoltage");
+    CParam *ReferenceVoltage = StsGetParam(funcindex,"ReferenceVoltage");
 	//}}AFX_STS_PARAM_PROTOTYPES
 
 	double vref[SITENUM] = { 0.0 };
@@ -1553,6 +1553,11 @@ DUT_API int RON(short funcindex, LPCTSTR funclabel)	{
 	delay_us(100);
 	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 	delay_us(100);
+
+	// FB RELEASE
+	FB_FOVI.Set(FV, 0.63f, FOVI_10V, FOVI_10MA, RELAY_OFF);
+	delay_ms(1);
+
 	// TM3
 	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 	delay_us(100);
@@ -1573,7 +1578,7 @@ DUT_API int RON(short funcindex, LPCTSTR funclabel)	{
 
 	SwFPVI1.Set(FI, 1.0e-3f, FPVI10_20V, FPVI10_1A, RELAY_ON);
 	delay_ms(1);
-	SwFPVI1.MeasureVI(10, 20);
+	SwFPVI1.MeasureVI(200, 10);
 	for(site = 0; site < SITENUM; site++)	{
 		Load1mAVSW[site] = SwFPVI1.GetMeasResult(site, MVRET);
     Load1mAISW[site] = SwFPVI1.GetMeasResult(site, MIRET);
@@ -1582,7 +1587,7 @@ DUT_API int RON(short funcindex, LPCTSTR funclabel)	{
 	SwFPVI1.Set(FI, 200.0e-3f, FPVI10_20V, FPVI10_1A, RELAY_ON);
 	delay_us(100);
 	VinFPVI0.MeasureVI(10, 20);
-	SwFPVI1.MeasureVI(10, 20);
+	SwFPVI1.MeasureVI(200, 10);
 	for(site = 0; site < SITENUM; site++)	{
 		Load200mAVSW[site] = SwFPVI1.GetMeasResult(site, MVRET);
     Load200mAISW[site] = SwFPVI1.GetMeasResult(site, MIRET);
@@ -2014,22 +2019,78 @@ DUT_API int IPK(short funcindex, LPCTSTR funclabel)	{
 
 DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 	//{{AFX_STS_PARAM_PROTOTYPES
-    CParam *Ivalley = StsGetParam(funcindex,"Ivalley");
-    CParam *Izero = StsGetParam(funcindex,"Izero");
-    CParam *IVALLEY_TESTMODE = StsGetParam(funcindex,"IVALLEY_TESTMODE");
-    CParam *IVALLEY0_TESTMODE = StsGetParam(funcindex,"IVALLEY0_TESTMODE");
-    CParam *SW_LEAK = StsGetParam(funcindex,"SW_LEAK");
-    CParam *INEG = StsGetParam(funcindex,"INEG");
+  CParam *Ivalley = StsGetParam(funcindex,"Ivalley");
+  CParam *Izero = StsGetParam(funcindex,"Izero");
+  CParam *IVALLEY_TESTMODE = StsGetParam(funcindex,"IVALLEY_TESTMODE");
+  CParam *IVALLEY0_TESTMODE = StsGetParam(funcindex,"IVALLEY0_TESTMODE");
+  CParam *INEG = StsGetParam(funcindex,"INEG");
   //}}AFX_STS_PARAM_PROTOTYPES
 
+	int SetV=0;
 
- int SetV=0;
+	double StepV = 0.0f;
+	double Izero1[4] = {0.0f}, Climit0[4] = {0.0f};
 
- double StepV = 0.0f;
- double Izero1[4] = {0.0f}, Climit0[4] = {0.0f};
+	// VIN
+	VinFPVI0.Set(FV, 0.0f, FPVI10_5V, FPVI10_100MA, RELAY_ON);	// POR, RESET TEST MODE
+	// SW
+	SwFPVI1.Set(FI, 1e-3f, FPVI10_20V, FPVI10_10MA, RELAY_ON);
+	// EN
+	EnFOVI.Set(FV, 0.0f, FOVI_5V, FOVI_10MA, RELAY_ON);
+	delay_ms(10);
+	// RELAY SETTINGS
+	rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, -1);
+	delay_ms(1);
 
- int flag[SITENUM] = {0};
- BYTE sitesta[SITENUM] = {0};
+	// VIN=6
+	VinFPVI0.Set(FV, 6.0f, FPVI10_20V, FPVI10_100MA, RELAY_ON);
+	// EN=5
+	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	// TM0
+	FB_FOVI.Set(FV, 6.5f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_ms(1);
+	FB_FOVI.Set(FV, 0.63f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_ms(1);
+
+	// TM1
+	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	// TM2
+	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+
+	// FB RELEASE
+	FB_FOVI.Set(FV, 0.63f, FOVI_10V, FOVI_10MA, RELAY_OFF);
+	delay_ms(1);
+
+	// TM3
+	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	// TM4
+	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	delay_us(100);
+	// VIN=12
+  VinFPVI0.Set(FV, 12.0f, FPVI10_20V, FPVI10_1A, RELAY_ON, 5);
+	delay_ms(1);
+
+
+
+/*
+  int SetV=0;
+
+  double StepV = 0.0f;
+  double Izero1[4] = {0.0f}, Climit0[4] = {0.0f};
+
+  int flag[SITENUM] = {0};
+  BYTE sitesta[SITENUM] = {0};
 
 
 	double Climit[4]={0.0f};
@@ -2095,7 +2156,7 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
     VinFPVI0.Set(FV, 12.0f, FPVI10_20V, FPVI10_1A, RELAY_ON);
     delay_ms(1);
 
-//RONLS
+	//RONLS
 
 
  //===== ICLHS =====
@@ -2490,10 +2551,14 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 
       rlyC.SetOn(-1);
  	delay_ms(1);
+*/
+	
+	// PowerDownReset
+	PWR0();
+	PWROFF();
+	rlyC.SetOn(-1);
+ 	delay_ms(1);
 
-
-
-
-    // TODO: Add your function code here
-    return 0;
+  // TODO: Add your function code here
+  return 0;
 }
