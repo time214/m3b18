@@ -66,6 +66,7 @@ using namespace std;
 #define VinFPVI 	  			5, ( 5 + 32), ( 5 + 64), ( 5 + 96)	// K6
 #define SwFPVI				    6, ( 6 + 32), ( 6 + 64), ( 6 + 96)	// K7
 #define ENFOVI						7, ( 7 + 32), ( 7 + 64), ( 7 + 96)	// K8
+#define FBEXT1K						8, ( 8 + 32), ( 8 + 64), ( 8 + 96)	// K9
 #define BstFOVI				    9, ( 9 + 32), ( 9 + 64), ( 9 + 96)	// K10
 #define FbFOVI	         10, (10 + 32), (10 + 64), (10 + 96)	// K11
 

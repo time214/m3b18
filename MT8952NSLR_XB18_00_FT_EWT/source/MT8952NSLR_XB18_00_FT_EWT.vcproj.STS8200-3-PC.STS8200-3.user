@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="C:\AccoTest\STS8200CROSS\testui.exe"
 				WorkingDirectory=""
-				CommandArguments="-AutoLoad &quot;C:\Users\STS8200-3\Desktop\MT8952NSLR_XB18_00_FT_EWT\MT8952NSLR_XB18_00_FT_EWT.pgs&quot;"
+				CommandArguments="-AutoLoad &quot;C:\Users\STS8200-3\Desktop\cooper\MT8952NSLR_XB18_00_FT_EWT_922\MT8952NSLR_XB18_00_FT_EWT.pgs&quot;"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -39,7 +39,7 @@
 			<DebugSettings
 				Command="C:\AccoTest\STS8200CROSS\testui.exe"
 				WorkingDirectory=""
-				CommandArguments="-AutoLoad &quot;C:\Users\STS8200-3\Desktop\MT8952NSLR_XB18_00_FT_EWT\MT8952NSLR_XB18_00_FT_EWT.pgs&quot;"
+				CommandArguments="-AutoLoad &quot;C:\Users\STS8200-3\Desktop\cooper\MT8952NSLR_XB18_00_FT_EWT_922\MT8952NSLR_XB18_00_FT_EWT.pgs&quot;"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
