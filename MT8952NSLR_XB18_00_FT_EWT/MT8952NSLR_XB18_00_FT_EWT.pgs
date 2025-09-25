@@ -1,5 +1,6 @@
 [File Description Block]
 FileKey = 5416-1850
+MIN_VER = 1.4.4.0
 [QA Setting Block]
 strIsQAFile = 0
 StartFunctionNum = -1
@@ -48,15 +49,15 @@ FUNCTION = IPK,1,11
     IPK0SW, VSW_IPK0, 1,1, , , "",, "0.0000",1,0, ""
     RIPK, RIPK, 1,1, , , "X",X, "0.0000",1,0, ""
 FUNCTION = CurrentLimit,1,5
-    Ivalley, ILIMIT, 1,1,3.1,4.4, "A",A, "0.0000",1,0, "-7"
+    Ivalley, ILIMIT, 1,1,3.1,4.4, "A",A, "0.0000",1,0, "Ratio"
     Izero, Izx, 1,1,-150,150, "mA",mA, "0.0000",1,0, ""
-    IVALLEY_TESTMODE, I_TEST, 1,1, , , "A",A, "0.0000",1,0, ""
+    IVALLEY_TESTMODE, I_TEST, 1,1,1,1.8, "A",A, "0.0000",1,0, ""
     IVALLEY0_TESTMODE, IVALLY0, 1,1, , , "",, "0.0000",1,0, ""
-    INEG, Ineg, 1,1, , , "A",A, "0.0000",1,0, "-9"
+    INEG, Ineg, 1,1,-1680,-1000, "mA",mA, "0.0000",1,0, ""
 FUNCTION = HSide,1,2
     ILK1, HSLEAK, 1,1,0,1000, "nA",nA, "0.0000",1,0, ""
     ILK2, LSLEAK, 1,1,0,1000, "nA",nA, "0.0000",1,0, ""
-FUNCTION = Switching1,0,4
+FUNCTION = Switching1,1,4
     SwitchingFrquency, FSW, 1,1,500,2000, "Khz",Khz, "0.0000",1,0, "0: 720K"
     HSOnTime, Ton, 1,1,0.1,2, "usec",usec, "0.0000",1,0, "-10-13"
     MinOffTime, Toff_min, 1,1,0.1,350, "nsec",nsec, "0.0000",1,0, "-10-13"
@@ -107,4 +108,4 @@ AllBinCount = 2
 1,1,3,0, "", "", "", "", "Pass__Default"
 4,4,4,0, "", "", "", "", "Fail__Default"
 [File MD5 Block]
-MD5 = 43C820FCEA565A0D1F04806D249CACFB
+MD5 = DB2EF30CA74CD687487C976164B58407

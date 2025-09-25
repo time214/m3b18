@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual C++ Express 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MT8952NSLR_XB18_00_FT_EWT", "MT8952NSLR_XB18_00_FT_EWT.vcproj", "{495CEB3E-06EF-4A56-ADC0-F5310D9F3133}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MT8952NSLR_XB18_00_FT_EWT", "MT8952NSLR_XB18_00_FT_EWT.vcproj", "{76F4EE5D-866D-45CA-9359-0F3675DEC111}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{495CEB3E-06EF-4A56-ADC0-F5310D9F3133}.Debug|Win32.ActiveCfg = Debug|Win32
-		{495CEB3E-06EF-4A56-ADC0-F5310D9F3133}.Debug|Win32.Build.0 = Debug|Win32
-		{495CEB3E-06EF-4A56-ADC0-F5310D9F3133}.Release|Win32.ActiveCfg = Release|Win32
-		{495CEB3E-06EF-4A56-ADC0-F5310D9F3133}.Release|Win32.Build.0 = Release|Win32
+		{76F4EE5D-866D-45CA-9359-0F3675DEC111}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76F4EE5D-866D-45CA-9359-0F3675DEC111}.Debug|Win32.Build.0 = Debug|Win32
+		{76F4EE5D-866D-45CA-9359-0F3675DEC111}.Release|Win32.ActiveCfg = Release|Win32
+		{76F4EE5D-866D-45CA-9359-0F3675DEC111}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
