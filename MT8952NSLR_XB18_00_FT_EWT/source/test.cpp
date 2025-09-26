@@ -16,6 +16,7 @@
 
 short DebugConsole[SITENUM] = { 1, 0, 0, 0 }, site = 0, flag[SITENUM] = { 0, 0, 0, 0 };
 double adresult[SITENUM] = { 0.0f };
+double adresult0[SITENUM] = { 0.0f };
 double adresult1[SITENUM][1000] = { 0.0f };
 
 BYTE sitesta[SITENUM] = { 0 };
@@ -2141,22 +2142,22 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 
   rlyC.SetOn(-1);
  	delay_ms(1);
-
 	// ********************************************************* IVALLY0 *********************************************************
 	// ********************************************************* IVALLY0 *********************************************************
 	// ********************************************************* IVALLY0 *********************************************************
 	for (site = 0; site < SITENUM; site++)	{
 		BEGIN_SINGLE_SITE(site);
-			rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, BstFOVI, -1);
+			rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, /*VBSTSW, GNDs,*/ -1);
+			////rlyC.SetOn(VinFPVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, FBEXT1K, VBSTSW, GNDs, -1);
 			delay_ms(1);
 			// VIN
  			VinFPVI0.Set(FV, 0.0f, FPVI10_5V, FPVI10_100MA, RELAY_ON);
 			// EN
 			EnFOVI.Set(FV, 0.0f, FOVI_5V, FOVI_10MA, RELAY_ON);
 			delay_ms(1);
-			// FB
-			FB_FOVI.Set(FV, 0.0f, FOVI_5V, FOVI_1MA, RELAY_ON);
-			delay_ms(1);
+			////// FB
+			////FB_FOVI.Set(FV, 0.0f, FOVI_5V, FOVI_1MA, RELAY_ON);
+			////delay_ms(1);
 			// VIN
 			VinFPVI0.Set(FV, 0.0f, FPVI10_10V, FPVI10_100MA, RELAY_ON);
 			// SW
@@ -2170,10 +2171,24 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 			EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 			// FB = 6.5
 			// TM0
+			////FB1KFOVI.Set(FV, 6.5f, FOVI_10V, FOVI_100MA, RELAY_ON);
 			FB_FOVI.Set(FV, 6.5f, FOVI_10V, FOVI_1MA, RELAY_ON);
 			delay_ms(3);
-			FB_FOVI.Set(FV, 0.63f, FOVI_10V, FOVI_1MA, RELAY_ON);
-			delay_ms(3);
+			////FB_FOVI.Set(FV, 0.63f, FOVI_10V, FOVI_1MA, RELAY_ON);
+			////delay_ms(3);
+			
+			// FB RELEASE
+			FB_FOVI.Set(FV, 6.5f, FOVI_10V, FOVI_1MA, RELAY_OFF);
+			////FB1KFOVI.Set(FV, 6.5f, FOVI_10V, FOVI_100MA, RELAY_OFF);
+			delay_ms(5);
+
+
+			// SW
+			SwFPVI1.Set(FI, 10e-3f, FPVI10_5V, FPVI10_100MA, RELAY_ON);
+			////SwFPVI1.Set(FI, 500e-3f, FPVI10_5V, FPVI10_1A, RELAY_ON);
+			delay_ms(5);
+
+
 			// TM1
 			EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 			delay_ms(1);
@@ -2196,21 +2211,25 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 			//delay_ms(1);
 			//EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 			//delay_ms(1);
+			
 
 			// FB = 5V/100uA
-			////FB_FOVI.Set(FI, 10e-6f, FOVI_10V, FOVI_100UA, RELAY_ON); 
-			FB_FOVI.Set(FV, float(5), FOVI_5V, FOVI_10UA, RELAY_ON); 
+			////FB_FOVI.Set(FI, 1e-6f, FOVI_5V, FOVI_100UA, RELAY_ON); 
+			FB_FOVI.Set(FV, float(5), FOVI_5V, FOVI_100UA, RELAY_ON); 
 			delay_ms(1);
 			
-			// RELAY SETTINGS
-			rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, VBSTSW, GNDs, -1);
-			delay_ms(1);
+			////FB1KFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_100MA, RELAY_ON);
+			////delay_ms(1);
+
 			// VDIFF(BST-SW)
-			BST2_FOVI.Set(FV, 5.0f, FOVI_20V, FOVI_10MA, RELAY_ON);
+			////BST2_FOVI.Set(FV, 5.0f, FOVI_20V, FOVI_10MA, RELAY_ON);
 			// VIN = 12
 			VinFPVI0.Set(FV, 12.0f, FPVI10_20V, FPVI10_1A, RELAY_ON);
 			delay_ms(1);
 
+			////FB1KFOVI.MeasureVI(100, 10);
+			FB_FOVI.MeasureVI(100, 10);
+			delay_ms(2);
 			for (ii = 0; ii < SITENUM; ii++) {
 				// IVALLY0
 				Climit0[ii] = 999.0f;
@@ -2234,8 +2253,12 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 				delay_us(100);
 
 				FB_FOVI.MeasureVI(20, 20);
+				////FB1KFOVI.MeasureVI(20, 20);
+				SwFPVI1.MeasureVI(20, 20);
 	      if (flag[site] == 0)	{
 					adresult[site] = FB_FOVI.GetMeasResult(site, MVRET);
+					////adresult[site] = FB1KFOVI.GetMeasResult(site, MVRET);
+					adresult0[site] = SwFPVI1.GetMeasResult(site, MIRET);
 					if (adresult[site] <= 2.0f && flag[site] == 0)	{
 						Climit0[site] = -StepV;
 						flag[site] = 1;
@@ -2251,7 +2274,7 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 				SwFPVI1.Set(FI, StepV, FPVI10_10V, FPVI10_1A, RELAY_ON);
 
 			// ILIMIT = IVALLEY0 + (I_TEST - IVALLEY0) * RATIO
-			Ivalley->SetTestResult(site, 0, (2.56 * (Climit[site] - Climit0[site])) + Climit0[site]);
+			Ivalley->SetTestResult(site, 0, Climit0[site]+(1.93 * (Climit[site] - Climit0[site])));
 			// IVALLEY0
 			IVALLEY0_TESTMODE->SetTestResult(site, 0, Climit0[site]);
 		END_SINGLE_SITE(); 

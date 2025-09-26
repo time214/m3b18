@@ -1,6 +1,5 @@
 [File Description Block]
 FileKey = 5416-1850
-MIN_VER = 1.4.4.0
 [QA Setting Block]
 strIsQAFile = 0
 StartFunctionNum = -1
@@ -49,7 +48,7 @@ FUNCTION = IPK,1,11
     IPK0SW, VSW_IPK0, 1,1, , , "",, "0.0000",1,0, ""
     RIPK, RIPK, 1,1, , , "X",X, "0.0000",1,0, ""
 FUNCTION = CurrentLimit,1,5
-    Ivalley, ILIMIT, 1,1,3.1,4.4, "A",A, "0.0000",1,0, "Ratio"
+    Ivalley, ILIMIT, 1,1,2,3, "A",A, "0.0000",1,0, "Ratio"
     Izero, Izx, 1,1,-150,150, "mA",mA, "0.0000",1,0, ""
     IVALLEY_TESTMODE, I_TEST, 1,1,1,1.8, "A",A, "0.0000",1,0, ""
     IVALLEY0_TESTMODE, IVALLY0, 1,1, , , "",, "0.0000",1,0, ""
@@ -108,4 +107,4 @@ AllBinCount = 2
 1,1,3,0, "", "", "", "", "Pass__Default"
 4,4,4,0, "", "", "", "", "Fail__Default"
 [File MD5 Block]
-MD5 = DB2EF30CA74CD687487C976164B58407
+MD5 = A9F597208810DEA4EA8AABA955F6BCCC

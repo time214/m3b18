@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="MT8952NSLR_XB18_00_FT_EWT"
-	ProjectGUID="{76F4EE5D-866D-45CA-9359-0F3675DEC111}"
+	ProjectGUID="{E6F16034-FF13-4E67-9A16-A4227CAC1AC2}"
 	>
 	<Platforms>
 		<Platform
@@ -47,7 +47,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\AccoTest\STS8200CROSS\INCLude"
+				AdditionalIncludeDirectories="C:\AccoTest\STS8200CROSS\INCLude;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MT8952NSLR_XB18_00_FT_EWT_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -79,7 +79,7 @@
 				OutputFile="../MT8952NSLR_XB18_00_FT_EWT.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="C:\AccoTest\STS8200CROSS\lIB"
+				AdditionalLibraryDirectories="C:\AccoTest\STS8200CROSS\lIB;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\debug/MT8952NSLR_XB18_00_FT_EWT.pdb"
 				ImportLibrary=".\debug/MT8952NSLR_XB18_00_FT_EWT.lib"
@@ -147,7 +147,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="C:\AccoTest\STS8200CROSS\INCLude"
+				AdditionalIncludeDirectories="C:\AccoTest\STS8200CROSS\INCLude;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MT8952NSLR_XB18_00_FT_EWT_EXPORTS"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -178,7 +178,7 @@
 				OutputFile="../MT8952NSLR_XB18_00_FT_EWT.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="C:\AccoTest\STS8200CROSS\lIB"
+				AdditionalLibraryDirectories="C:\AccoTest\STS8200CROSS\lIB;"
 				ProgramDatabaseFile=".\Release/MT8952NSLR_XB18_00_FT_EWT.pdb"
 				ImportLibrary=".\Release/MT8952NSLR_XB18_00_FT_EWT.lib"
 				TargetMachine="1"
