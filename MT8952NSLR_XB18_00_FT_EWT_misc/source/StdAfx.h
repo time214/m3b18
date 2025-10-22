@@ -74,52 +74,51 @@ using namespace std;
 #define VBSTSW			     12, (12 + 32), (12 + 64), (12 + 96)	// K13		V/I SERIES
 #define QTMU_SWAP			   13, (13 + 32), (13 + 64), (13 + 96)	// K14
 #define TSSQTMU				   15, (15 + 32), (15 + 64), (15 + 96)	// K16
-
-////// ****************************************************************************** S1, IDC1
-////#define CapVINS1  				(0  +  0)
-////#define CapSWS1  					(1  +  0)
-////#define ENQTMUaS1					(2  +  0)
-////#define VinFPVIS1				  (5  +  0)
-////#define SwFPVIS1					(6  +  0)
-////#define ENFOVIS1					(7  +  0)
-////#define ENOCS1  				  (7  +  0)
-////#define BstFOVIS1 				(9  +  0)
-////#define FbFOVIS1  			  (10 +  0)
-////#define GNDsS1		        (11 +  0)
-////#define QTMU_SWAPS1			  (13 +  0)
-////// ****************************************************************************** S2, IDC2
-////#define CapVINS2  				(0  + 32)
-////#define CapSWS2  					(1  + 32)
-////#define ENQTMUaS2					(2  + 32)
-////#define VinFPVIS2				  (5  + 32)
-////#define SwFPVIS2					(6  + 32)
-////#define ENFOVIS2					(7  + 32)
-////#define ENOCS2  				  (7  + 32)
-////#define BstFOVIS2 				(9  + 32)
-////#define FbFOVIS2  			  (10 + 32)
-////#define GNDsS2		        (11 + 32)
-////#define QTMU_SWAPS2			  (13 + 32)
-////// ****************************************************************************** S3, IDC3
-////#define CapVINS3  				(0  + 64)
-////#define CapSWS3  					(1  + 64)
-////#define ENQTMUaS3					(2  + 64)
-////#define VinFPVIS3				  (5  + 64)
-////#define SwFPVIS3					(6  + 64)
-////#define ENFOVIS3					(7  + 64)
-////#define ENOCS3  				  (7  + 64)
-////#define BstFOVIS3 				(9  + 64)
-////#define FbFOVIS3  			  (10 + 64)
-////#define GNDsS3		        (11 + 64)
-////#define QTMU_SWAPS3			  (13 + 64)
-////// ****************************************************************************** S4, IDC4
-////#define CapVINS4  				(0  + 96)
-////#define CapSWS4  					(1  + 96)
-////#define ENQTMUaS4					(2  + 96)
-////#define VinFPVIS4				  (5  + 96)
-////#define SwFPVIS4					(6  + 96)
-////#define ENFOVIS4					(7  + 96)
-////#define ENOCS4  				  (7  + 96)
-////#define BstFOVIS4 				(9  + 96)
-////#define FbFOVIS4  			  (10 + 96)
-////#define GNDsS4		        (11 + 96)
-////#define QTMU_SWAPS4			  (13 + 96)
+// ****************************************************************************** S1, IDC1
+#define CapVINsS1  				0 
+#define CapSWS1  					1
+#define ENQTMUaS1					2
+#define VinFPVIS1				  5
+#define SwFPVIS1					6
+#define ENFOVIS1					7
+#define ENOCS1  				  7
+#define BstFOVIS1 				9
+#define FbFOVIS1  			 10
+#define GNDsS1		       11
+#define QTMU_SWAPS1			 13
+// ****************************************************************************** S2, IDC2
+#define CapVINsS2  				(0  + 32)
+#define CapSWS2  					(1  + 32)
+#define ENQTMUaS2					(2  + 32)
+#define VinFPVIS2				  (5  + 32)
+#define SwFPVIS2					(6  + 32)
+#define ENFOVIS2					(7  + 32)
+#define ENOCS2  				  (7  + 32)
+#define BstFOVIS2 				(9  + 32)
+#define FbFOVIS2  			  (10 + 32)
+#define GNDsS2		        (11 + 32)
+#define QTMU_SWAPS2			  (13 + 32)
+// ****************************************************************************** S3, IDC3
+#define CapVINsS3  				(0  + 64)
+#define CapSWS3  					(1  + 64)
+#define ENQTMUaS3					(2  + 64)
+#define VinFPVIS3				  (5  + 64)
+#define SwFPVIS3					(6  + 64)
+#define ENFOVIS3					(7  + 64)
+#define ENOCS3  				  (7  + 64)
+#define BstFOVIS3 				(9  + 64)
+#define FbFOVIS3  			  (10 + 64)
+#define GNDsS3		        (11 + 64)
+#define QTMU_SWAPS3			  (13 + 64)
+// ****************************************************************************** S4, IDC4
+#define CapVINsS4  				(0  + 96)
+#define CapSWS4  					(1  + 96)
+#define ENQTMUaS4					(2  + 96)
+#define VinFPVIS4				  (5  + 96)
+#define SwFPVIS4					(6  + 96)
+#define ENFOVIS4					(7  + 96)
+#define ENOCS4  				  (7  + 96)
+#define BstFOVIS4 				(9  + 96)
+#define FbFOVIS4  			  (10 + 96)
+#define GNDsS4		        (11 + 96)
+#define QTMU_SWAPS4			  (13 + 96)
