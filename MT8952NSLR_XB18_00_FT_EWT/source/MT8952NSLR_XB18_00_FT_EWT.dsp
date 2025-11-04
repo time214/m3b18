@@ -568,6 +568,8 @@ RSC=rc.exe
 # ADD CPP /nologo 
 # ADD LINK32 
 # ADD CPP /nologo 
+# ADD LINK32 
+# ADD CPP /nologo 
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MT8952NSLR_XB18_00_FT_EWT_EXPORTS" /Yu"stdafx.h" /FD /c
 # ADD CPP /nologo /MT /W3 /GX /O2  /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MT8952NSLR_XB18_00_FT_EWT_EXPORTS" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
@@ -596,6 +598,8 @@ LINK32=link.exe
 # PROP Target_Dir ""
 # ADD LINK32 /libpath:"C:\AccoTest\STS8200CROSS\lIB"
 # ADD CPP /nologo /I "C:\AccoTest\STS8200CROSS\INCLude"
+# ADD LINK32 
+# ADD CPP /nologo 
 # ADD LINK32 
 # ADD CPP /nologo 
 # ADD LINK32 

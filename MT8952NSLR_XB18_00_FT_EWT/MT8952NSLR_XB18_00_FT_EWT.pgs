@@ -1,5 +1,6 @@
 [File Description Block]
 FileKey = 5416-1850
+MIN_VER = 1.4.4.0
 [QA Setting Block]
 strIsQAFile = 0
 StartFunctionNum = -1
@@ -112,4 +113,4 @@ AllBinCount = 4
 5,5,1,1, "SiteCheck", "0.99", "1.01", "0", "SiteCheck__AllFail"
 6,5,1,1, "RCont", "-1", "10", "0", "RCont__AllFail"
 [File MD5 Block]
-MD5 = 8F40C67A976B02081FCF8573DB0AF677
+MD5 = A9EB96CAC254D3EEF8AF347AD2BDFEFE

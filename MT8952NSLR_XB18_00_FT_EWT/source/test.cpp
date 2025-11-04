@@ -1592,7 +1592,7 @@ DUT_API int RegulatorV(short funcindex, LPCTSTR funclabel)	{
 	delay_us(300);
 	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
 	delay_us(300);
-	FB_FOVI.Set(FI, -0.5e-6f, FOVI_1V, FOVI_10UA, RELAY_ON); 
+	FB_FOVI.Set(FI, -0.5e-6f, FOVI_1V, FOVI_10UA, RELAY_SENSE_ON/*RELAY_ON*/); 
 	delay_ms(1);
 
 	FB_FOVI.MeasureVI(300, 5);
