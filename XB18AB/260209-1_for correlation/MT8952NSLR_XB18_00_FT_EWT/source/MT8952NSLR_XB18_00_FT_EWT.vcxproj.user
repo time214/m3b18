@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+		<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+		<LocalDebuggerCommand>C:\AccoTest\STS8200CROSS\testui.exe</LocalDebuggerCommand>
+		<DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+		<LocalDebuggerCommandArguments>-AutoLoad "C:\Documents and Settings\ADMIN\桌面\260209-1\MT8952NSLR_XB18_00_FT_EWT\MT8952NSLR_XB18_00_FT_EWT.pgs"</LocalDebuggerCommandArguments>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+		<LocalDebuggerCommand>C:\AccoTest\STS8200CROSS\testui.exe</LocalDebuggerCommand>
+		<DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+		<LocalDebuggerCommandArguments>-AutoLoad "C:\Documents and Settings\ADMIN\桌面\260209-1\MT8952NSLR_XB18_00_FT_EWT\MT8952NSLR_XB18_00_FT_EWT.pgs"</LocalDebuggerCommandArguments>
+		</PropertyGroup>
+        </Project>

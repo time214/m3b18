@@ -1,0 +1,115 @@
+[File Description Block]
+FileKey = 5416-1850
+[QA Setting Block]
+strIsQAFile = 0
+StartFunctionNum = -1
+[Document Block]
+strDllFileName = MT8952NSLR_XB18_00_FT_EWT.dll
+iPgsVersion = 1002
+strOrignDate = 2017-07-10 17:34:12
+strAdapter = 
+strDutName = 
+strComment = ""
+iUserStrCount = 0
+[DataSheet Variable Block]
+sSiteCount= 4
+TestFunctionCount = 19
+FUNCTION = SiteNoChk,1,1
+    SiteCheck, SiteCheck, 1,1,0.99,1.01, "V",V, "0",1,0, ""
+FUNCTION = ContactChk,0,1
+    RCont, RCont, 1,1,-1,10, "ohm",ohm, "0.000",1,0, ""
+FUNCTION = Continuity,1,6
+    VIN, preVIN, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    SW, preSW, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    BST, preBST, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    EN, preEN, 1,1,-1.0,-0.35, "V",V, "0.0000",1,0, ""
+    FB, preFB, 1,1,-1.6,-0.35, "V",V, "0.0000",1,0, ""
+    SWVIN, preSWVIN, 1,1,0.3,0.6, "V",V, "0.0000",1,0, ""
+FUNCTION = SupplyCurrent,1,2
+    Shutdown, IINSD, 1,1,0,5, "uA",uA, "0.0000",1,0, "1"
+    Quiescent, IINQ, 1,1,0,350, "uA",uA, "0.0000",1,0, "2"
+FUNCTION = RON,1,6
+    HSRON, RdsON_HS, 1,1,10,260, "mohm",mohm, "0.0000",1,0, "3"
+    HRON_VIN, HRON_VIN, 1,1,11.5,12.5, "V",V, "0.0000",1,0, ""
+    HRON_SW, HRON_SW, 1,1,11.5,12.5, "V",V, "0.0000",1,0, ""
+    LSRON, RdsON_LS, 1,1,10,130, "mohm",mohm, "0.0000",1,0, "6"
+    LSRON_VIN, LSRON_VIN, 1,1,11.5,12.5, "V",V, "0.0000",1,0, ""
+    LSRON_SW, LSRON_SW, 1,1,-0.5,0.5, "V",V, "0.0000",1,0, ""
+FUNCTION = IPK,1,11
+    IPK1, IPK, 1,1,3,4, "A",A, "0.0000",1,0, "4"
+    IPK_TESTMODE, I, 1,1,0.8,1.8, "A",A, "0.0000",1,0, ""
+    IPKSW, VSW_IPK, 1,1, , , "",, "0.0000",1,0, ""
+    IPKVIN, VIN_IPK, 1,1, , , "V",V, "0.0000",1,0, ""
+    IEN, IEN5V, 1,1, , , "uA",uA, "0.0000",1,0, ""
+    IEN0, IPKREF0, 1,1, , , "uA",uA, "0.0000",1,0, ""
+    IEN1, IPKREF, 1,1, , , "uA",uA, "0.0000",1,0, ""
+    IPK0_TESTMODE, IPK0, 1,1,-0.4,0.4, "A",A, "0.0000",1,0, ""
+    IPK0VIN, VIN_IPK0, 1,1, , , "",, "0.0000",1,0, ""
+    IPK0SW, VSW_IPK0, 1,1, , , "",, "0.0000",1,0, ""
+    RIPK, RIPK, 1,1, , , "X",X, "0.0000",1,0, ""
+FUNCTION = CurrentLimit,1,5
+    Ivalley, ILIMIT, 1,1,2,3, "A",A, "0.0000",1,0, "Ratio"
+    Izero, Izx, 1,1,-150,150, "mA",mA, "0.0000",1,0, ""
+    IVALLEY_TESTMODE, I_TEST, 1,1,1,1.8, "A",A, "0.0000",1,0, ""
+    IVALLEY0_TESTMODE, IVALLY0, 1,1, , , "",, "0.0000",1,0, ""
+    INEG, Ineg, 1,1,-1680,-1000, "mA",mA, "0.0000",1,0, ""
+FUNCTION = Switching1,1,4
+    SwitchingFrquency, FSW, 1,1,500,2000, "Khz",Khz, "0.0000",1,0, "0: 720K"
+    HSOnTime, Ton, 1,1,0.1,2, "usec",usec, "0.0000",1,0, "-10-13"
+    MinOffTime, Toff_min, 1,1,0.1,350, "nsec",nsec, "0.0000",1,0, "-10-13"
+    MaxDuty, DMAX, 1,1, , , "%",%, "0.0000",1,0, "-10-13"
+FUNCTION = HSide,1,2
+    ILK1, HSLEAK, 1,1,0,1000, "nA",nA, "0.0000",1,0, ""
+    ILK2, LSLEAK, 1,1,0,1000, "nA",nA, "0.0000",1,0, ""
+FUNCTION = BangGap,1,1
+    VBG, VBG, 1,1,1.1,1.3, "V",V, "0.0000",1,0, "14"
+FUNCTION = RegulatorV,1,1
+    ReferenceVoltage, VREF1, 1,1,776,824, "mV",mV, "0.0000",1,0, "14"
+FUNCTION = CurrentFB,1,1
+    FBCurrent, IFB, 1,1,0,100, "nA",nA, "0.0000",1,0, "15"
+FUNCTION = SoftStartTime,1,1
+    TSS, TSS, 1,1,0.5,2.5, "msec",msec, "0.0000",1,0, "16"
+FUNCTION = FuncEN1,1,3
+    VENH, VENON, 1,1,1.11,1.31, "V",V, "0.0000",1,1, "18"
+        goPassFail,goPassFail, 0, 0, "0", "", "0", "", ""
+    VNEL, VENOFF, 1,1,1.01,1.21, "V",V, "0.0000",1,0, "19"
+    VENHYS, VENHys, 1,1,1,300, "mV",mV, "0.0000",1,0, ""
+FUNCTION = FuncEN2,1,3
+    IEN1, IENH, 1,1,1,3.5, "uA",uA, "0.0000",1,0, "20"
+    IEN2, IENL, 1,1,-1000,1000, "nA",nA, "0.0000",1,0, "21"
+    REN, REN, 1,1,1,1.5, "Mohm",Mohm, "0.0000",1,0, ""
+FUNCTION = UVLO,1,3
+    UVLO_Rising, VinUVLOH, 1,1,3.6,4.2, "V",V, "0.0000",1,1, "22"
+        goPassFail,goPassFail, 0, 0, "0", "", "0", "", ""
+    UVLO_Falling, VinUVLOL, 1,1, , , "V",V, "0.0000",1,0, ""
+    UVLO_VHYS, VinUVLOHYS, 1,1,100,600, "mV",mV, "0.0000",1,0, "23"
+FUNCTION = OVP,1,3
+    OVP_Rising, VinOVPH, 1,1,18,22, "V",V, "0.0000",1,0, "24"
+    OVP_Falling, VinOVPL, 1,1,17,21, "V",V, "0.0000",1,0, ""
+    OVP_VHYS, VinOVPHYS, 1,1,1000,3000, "mV",mV, "0.0000",1,0, "25"
+FUNCTION = BOOST,1,3
+    BSTOK_HIGH, VBSTOK_H, 1,1,2.85,3.15, "V",V, "0.0000",1,1, "27"
+        goPassFail,goPassFail, 0, 0, "0", "", "0", "", ""
+    BSTOK_LOW, VBSTOK_L, 1,1,2.55,2.85, "V",V, "0.0000",1,0, ""
+    BSTOK_HYS, VBSTOK_Hys, 1,1,10,400, "mV",mV, "0.0000",1,0, ""
+FUNCTION = pContinuity,1,6
+    VIN, postVIN, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    SW, postSW, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    BST, postBST, 1,1,-0.7,-0.35, "V",V, "0.0000",1,0, ""
+    EN, postEN, 1,1,-1.0,-0.35, "V",V, "0.0000",1,0, ""
+    FB, postFB, 1,1,-1.6,-0.35, "V",V, "0.0000",1,0, ""
+    SWVIN, postSWVIN, 1,1,0.3,0.6, "V",V, "0.0000",1,0, ""
+[Station Setting Block]
+ProgramType = 0
+StationCount = 1
+StationStatus = 1,1,1,1,1,1,1,1,
+StationInterval = 0,0,0,0,0,0,0,0,
+StationNumber = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+[Bin Definition Block]
+AllBinCount = 4
+1,1,3,0, "", "", "", "", "Pass__Default"
+4,4,4,0, "", "", "", "", "Fail__Default"
+5,5,1,1, "SiteCheck", "0.99", "1.01", "0", "SiteCheck__AllFail"
+6,5,1,1, "RCont", "-1", "10", "0", "RCont__AllFail"
+[File MD5 Block]
+MD5 = 4E1429F9BB16983166EBBF2D09D9B621
