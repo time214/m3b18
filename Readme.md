@@ -8,3 +8,8 @@ MT8952NSLR_XB18_00_FT_EWT
 
 251104-2, 修正量測vref時偏低之問題
 #1595, 將RELAY_ON 修改為 RELAY_SENSE_ON後可正常
+
+260320-1, correlation result for XB18AB_MT8952NSLR
+1,Fsw: TE+58.8KHz。
+2,MINOFF :TE-32nS。
+3,VBG: TE+9.68mV
