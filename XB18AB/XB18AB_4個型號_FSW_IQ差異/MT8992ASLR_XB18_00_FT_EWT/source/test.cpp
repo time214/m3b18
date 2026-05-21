@@ -24,6 +24,7 @@ FOVI FB1KFOVI				(1,  "FB1K");				// FB-1K,   PIN6
 FOVI BST_FOVI				(2,  "BST");				// BST	,	  PIN4
 FOVI FB_FOVI				(3,  "FB");					// FB		,   PIN6
 FOVI SiteChk				(6,  "SITECHECK");	// SITE No.
+FOVI ContChk				(5,  "CONTCHK");		// CONT_CHK
 FOVI BST2_FOVI			(7,  "BST-SW");			// BST-SW
 // OTHER
 QTMU_PLUS qtmu0			(0);
@@ -122,7 +123,10 @@ DUT_API int SiteNoChk(short funcindex, LPCTSTR funclabel)	{
 	
 	for(site = 0; site < SITENUM; site++ )	{
 		adresult[site]=SiteChk.GetMeasResult(site, MVRET);
-		SiteCheck->SetTestResult(site, 0, adresult[site] / (site + 1));
+		adresult[site] = adresult[site] / (site + 1);
+		if(adresult[site]>0.9 && adresult[site] <1.1)	adresult[site] = int(1);
+		else adresult[site] = 0;
+		SiteCheck->SetTestResult(site, 0, adresult[site]);
 	}
 	SiteChk.Set(FI, 0, FOVI_5V,FOVI_1MA,RELAY_ON);
 	delay_ms(1);
@@ -141,8 +145,27 @@ DUT_API int ContactChk(short funcindex, LPCTSTR funclabel)	{
   CParam *RCont = StsGetParam(funcindex,"RCont");
   //}}AFX_STS_PARAM_PROTOTYPES
 
-  // TODO: Add your function code here
-  return 0;
+	double vpin[SITENUM]={0,0,0,0};
+
+	rlyC.SetOn(CONT_CHK, -1);
+	delay_ms(2);
+
+	ContChk.Set(FI, 1e-3, FOVI_2V, FOVI_1MA, RELAY_ON);
+	delay_ms(3);
+	
+	ContChk.MeasureVI(10, 10);
+	// MEASURE, OFFSET, LOG
+	for(site = 0; site < SITENUM; site++)	{
+    vpin[site] = ContChk.GetMeasResult(site, MVRET);
+		RCont->SetTestResult(site, 0, vpin[site]);
+	}
+
+	ContChk.Set(FI, 0.0e-6, FOVI_2V, FOVI_1MA, RELAY_ON);
+	rlyC.SetOn(-1);
+	delay_ms(3);
+	ContChk.Set(FI, 0.0e-6, FOVI_2V, FOVI_1MA, RELAY_OFF);
+	
+	return 0;
 }
 // test02, Continuity
 // ****************************************** Continuity ******************************************
@@ -257,14 +280,18 @@ DUT_API int SupplyCurrent(short funcindex, LPCTSTR funclabel)	{
 	// ************************************** IQ VIN=12V **************************************
 	// ************************************** IQ VIN=12V **************************************
 	// ************************************** IQ VIN=12V **************************************
+	// FB
+	FB_FOVI.Set(FV, float(0.85), FOVI_5V, FOVI_10MA, RELAY_ON);
+	delay_ms(1);
+
 	VinFPVI0.Set(FV, float(12.0), FPVI10_20V, FPVI10_1MA, RELAY_ON, 2);
 	rlyC.SetOn(VinFPVI, ENFOVI, FbFOVI, SwFPVI, -1);
 	delay_ms(2);
 	// EN = 5
 	EnFOVI.Set(FV, float(5.0), FOVI_5V,	FOVI_100MA, RELAY_ON);
-	// FB
-	FB_FOVI.Set(FV, float(0.85), FOVI_5V,	FOVI_10MA, RELAY_ON);
-	delay_ms(1);
+	//// FB
+	//FB_FOVI.Set(FV, float(0.85), FOVI_5V,	FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
 	//SwFPVI1.Set(FI, float(-0.1e-3), FPVI10_20V, FPVI10_100MA, RELAY_ON);
 	delay_ms(1);
 
@@ -1144,87 +1171,89 @@ DUT_API int CurrentLimit(short funcindex, LPCTSTR funclabel)	{
 
 	rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, -1);
 	delay_ms(1);
-	// ****************************************** IZX ******************************************
-	// ****************************************** IZX ******************************************
-	// ****************************************** IZX ******************************************
-	// VIN=6
-	VinFPVI0.Set(FV, 6.0f, FPVI10_10V, FPVI10_1A, RELAY_ON);
-	// EN=5
-	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	// FB=6.5
-	// TM0
-	FB_FOVI.Set(FV, 6.5f, FOVI_10V, FOVI_1MA, RELAY_ON);
-	delay_ms(3);
-	// FB LOW
-	FB_FOVI.Set(FV, 0.0f, FOVI_10V, FOVI_1MA, RELAY_ON); 
-	delay_ms(1);
-	// TM1
-	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	// TM2
-	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	// TM3 FALLING EDGE
-	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	// TM4, FALLING EDGE
-	EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	// EN=5
-	EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
-	delay_ms(1);
-	// FB=5V/10uA
-	FB_FOVI.Set(FV, float(5.0), FOVI_5V, FOVI_10UA, RELAY_ON); 
-	delay_ms(1);
-	// VIN=12
-  VinFPVI0.Set(FV, 12.0f, FPVI10_20V, FPVI10_1A, RELAY_ON);
-  delay_ms(1);
+	//// ****************************************** IZX ******************************************
+	//// ****************************************** IZX ******************************************
+	//// ****************************************** IZX ******************************************
+	//// VIN=6
+	//VinFPVI0.Set(FV, 6.0f, FPVI10_10V, FPVI10_1A, RELAY_ON);
+	//// EN=5
+	//EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//// FB=6.5
+	//// TM0
+	//FB_FOVI.Set(FV, 6.5f, FOVI_10V, FOVI_1MA, RELAY_ON);
+	//delay_ms(3);
+	//// FB LOW
+	//FB_FOVI.Set(FV, 0.0f, FOVI_10V, FOVI_1MA, RELAY_ON); 
+	//delay_ms(1);
+	//// TM1
+	//EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//// TM2
+	//EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//// TM3 FALLING EDGE
+	//EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//// TM4, FALLING EDGE
+	//EnFOVI.Set(FV, 0.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//// EN=5
+	//EnFOVI.Set(FV, 5.0f, FOVI_10V, FOVI_10MA, RELAY_ON);
+	//delay_ms(1);
+	//// FB=5V/10uA
+	//FB_FOVI.Set(FV, float(5.0), FOVI_5V, FOVI_10UA, RELAY_ON); 
+	//delay_ms(1);
+	//// VIN=12
+ // VinFPVI0.Set(FV, 12.0f, FPVI10_20V, FPVI10_1A, RELAY_ON);
+ // delay_ms(1);
 
-	// Izx
-	FreshSiteFlagInit();
-  for (site = 0; site < SITENUM; site++)
-		Izx[site] = 999.0f;
+	//// Izx
+	//FreshSiteFlagInit();
+ // for (site = 0; site < SITENUM; site++)
+	//	Izx[site] = 999.0f;
 
-  for (StepV = -0.3f; StepV <= 0.3f; StepV += 0.01f)	{
-		SetV = 0;
-    for (site = 0; site < SITENUM; site++)	{
-			BEGIN_SINGLE_SITE(site);
-				if (flag[site] == 0)	{
-					SetV = 1;
-					SwFPVI1.Set(FI, StepV, FPVI10_20V, FPVI10_1A, RELAY_ON);
-				}
-      END_SINGLE_SITE();
-		}
-    delay_ms(1);
-    FB_FOVI.MeasureVI(20, 20);
+ // for (StepV = -0.3f; StepV <= 0.3f; StepV += 0.01f)	{
+	//	SetV = 0;
+ //   for (site = 0; site < SITENUM; site++)	{
+	//		BEGIN_SINGLE_SITE(site);
+	//			if (flag[site] == 0)	{
+	//				SetV = 1;
+	//				SwFPVI1.Set(FI, StepV, FPVI10_20V, FPVI10_1A, RELAY_ON);
+	//			}
+ //     END_SINGLE_SITE();
+	//	}
+ //   delay_ms(1);
+ //   FB_FOVI.MeasureVI(20, 20);
 
-		for (site = 0; site < SITENUM; site++)	{
-			if (flag[site] == 0)	{
-				adresult[site] = FB_FOVI.GetMeasResult(site, MVRET);
+	//	for (site = 0; site < SITENUM; site++)	{
+	//		if (flag[site] == 0)	{
+	//			adresult[site] = FB_FOVI.GetMeasResult(site, MVRET);
 
-				if (adresult[site] <= 1.0f && flag[site] == 0)	{
-					Izx[site] = -StepV;
-					// Offset
-					Izx[site] += float(-0.0225);
-					flag[site] = 1;
-				}
-				else	{
-					Izx[site] = 99.0f;
-				}
-			}
-			if (SetV == 0) break;
-		}
-	}
-	for(StepV = -0.5f; StepV <= 0.0f; StepV = StepV + 0.1f )
-		SwFPVI1.Set(FI, StepV, FPVI10_10V, FPVI10_1A, RELAY_ON);
-	for(site = 0; site < SITENUM; site++ )
+	//			if (adresult[site] <= 1.0f && flag[site] == 0)	{
+	//				Izx[site] = -StepV;
+	//				// Offset
+	//				Izx[site] += float(-0.0225);
+	//				flag[site] = 1;
+	//			}
+	//			else	{
+	//				Izx[site] = 99.0f;
+	//			}
+	//		}
+	//		if (SetV == 0) break;
+	//	}
+	//}
+	//for(StepV = -0.5f; StepV <= 0.0f; StepV = StepV + 0.1f )
+	//	SwFPVI1.Set(FI, StepV, FPVI10_10V, FPVI10_1A, RELAY_ON);
+	for(site = 0; site < SITENUM; site++ )	{
+		Izx[site] = 999.0;
 		Izero->SetTestResult(site, 0, Izx[site]*1e3);
+	}
 	// ****************************************** Ineg ******************************************
 	// ****************************************** Ineg ******************************************
 	// ****************************************** Ineg ******************************************
@@ -1726,7 +1755,7 @@ DUT_API int SoftStartTime(short funcindex, LPCTSTR funclabel)	{
 	delay_ms(10);
 
 	// RELAY SETTING
-	rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, GNDs, VBSTSW, TSSQTMU, QTMU_SWAP, -1);
+	rlyC.SetOn(VinFPVI, FbFOVI, ENFOVI, SwFPVI, CapVIN, CBSTSW, GNDs, VBSTSW, TSSQTMU, /*QTMU_SWAP,*/ -1);
 	delay_ms(1);
 
 	// VIN
@@ -1818,25 +1847,24 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 	// ************************************** VenUVLO ON **************************************
 	// ************************************** VenUVLO ON **************************************
 	// ************************************** VenUVLO ON **************************************
-	for(vf = float(0.9); vf < float(1.5);)	{
-		for(site = 0; site < SITENUM; site++)	{
-			EnFOVI.Set(FV, float(vf), FOVI_5V,	FOVI_100MA, RELAY_ON);
- 			delay_us(300);
-		
-			VinFPVI0.MeasureVI(200, 5);
-			ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
-			if( (ICC[site] > float(1200e-6f))&&flag[site]==0)	{
-				EnFOVI.MeasureVI(30, 10);
-				VEN_ON[site] = EnFOVI.GetMeasResult(site, MVRET);
-				flag[site] = 1;
-			}
-		}
-		if(vf >= 1.15f) 
-			StepV = float(10e-3);
-		vf += float(StepV);
-		if(flag[0] && flag[1] && flag[2] && flag[3])
-			break;
-	}
+  for (vf = float(0.9); vf < float(1.5);) {
+    for (site = 0; site < SITENUM; site++)  if (!flag[site]) {
+        EnFOVI.Set(FV, float(vf), FOVI_5V, FOVI_100MA, RELAY_ON);
+        delay_us(300);
+
+        VinFPVI0.MeasureVI(200, 5);
+        ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
+        if ((ICC[site] > float(1200e-6f)) && flag[site] == 0) {
+          EnFOVI.MeasureVI(30, 10);
+          // VEN_ON[site] = EnFOVI.GetMeasResult(site, MVRET);
+          VEN_ON[site] = float(vf);
+          flag[site] = 1;
+        }
+      }
+    if (vf >= 1.15f) StepV = float(10e-3);
+    vf += float(StepV);
+    if (flag[0] && flag[1] && flag[2] && flag[3]) break;
+  }
 	// ************************************** VenUVLO OFF **************************************
 	// ************************************** VenUVLO OFF **************************************
 	// ************************************** VenUVLO OFF **************************************
@@ -1846,25 +1874,24 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 	EnFOVI.Set(FV, float(VEN_ON[0]), FOVI_5V,	FOVI_10MA, RELAY_ON);
  	delay_ms(10);
 
-	for(vf = float(VEN_ON[0]); vf > float(0.9);)	{
-		for(site = 0; site < SITENUM; site++)	{
-			EnFOVI.Set(FV, float(vf), FOVI_5V,	FOVI_100MA, RELAY_ON);
- 			delay_us(300);
-		
-			VinFPVI0.MeasureVI(100, 10);
-			ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
-			if( (ICC[site] < float(800e-6f))&&flag[site]==0)	{
-				EnFOVI.MeasureVI(30, 10);
-				VEN_OFF[site] = EnFOVI.GetMeasResult(site, MVRET);
-				flag[site] = 1;
-			}
-		}
-		if(vf <= 1.15f) 
-			StepV = float(-10e-3);
-		vf += float(StepV);
-		if(flag[0] && flag[1] && flag[2] && flag[3])
-			break;
-	}
+  for (vf = float(1.23); vf > float(0.9);) {
+    for (site = 0; site < SITENUM; site++)  if (!flag[site]) {
+        EnFOVI.Set(FV, float(vf), FOVI_5V, FOVI_100MA, RELAY_ON);
+        delay_us(300);
+
+        VinFPVI0.MeasureVI(100, 10);
+        ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
+        if ((ICC[site] < float(800e-6f)) && flag[site] == 0) {
+          EnFOVI.MeasureVI(30, 10);
+          // VEN_OFF[site] = EnFOVI.GetMeasResult(site, MVRET);
+          VEN_OFF[site] = float(vf);
+          flag[site] = 1;
+        }
+      }
+    if (vf <= 1.15f) StepV = float(-10e-3);
+    vf += float(StepV);
+    if (flag[0] && flag[1] && flag[2] && flag[3]) break;
+  }
 	// ************************************** IEN(2V) **************************************
 	// ************************************** IEN(2V) **************************************
 	// ************************************** IEN(2V) **************************************
@@ -2178,44 +2205,44 @@ DUT_API int BOOST(short funcindex, LPCTSTR funclabel)	{
 	// ************************************** BSTOK_ON **************************************
 	// ************************************** BSTOK_ON **************************************
 	// ************************************** BSTOK_ON **************************************
-	for(site = 0; site < SITENUM; site++)	{
-		for(i = 1.5f; i <= 3.5f;)	{
-			// BST (BST-SW Vdiff = 1.5 to 3.5, real 4.5v - 6.5v)
-			BST2_FOVI.Set(FV, i, FOVI_5V, FOVI_10MA, RELAY_ON);
-			delay_us(300);
-			FB_FOVI.MeasureVI(10, 5);
-			delay_us(300);
-			TMPV[site] = FB_FOVI.GetMeasResult(site, MVRET);
-			if(TMPV[site] > float(4.8))	{
-				flag[site] = 1;
-				BST2_FOVI.MeasureVI(10, 5);
-				BSTOK_ON[site] = BST2_FOVI.GetMeasResult(site, MVRET);
-			}
-			i += step_v;
-			if(flag[0] && flag[1] && flag[2] && flag[3])
-				break;
-		}
-	}
+  for (i = 1.5f; i <= 3.5f;) {
+    for (site = 0; site < SITENUM; site++)  if (!flag[site]) {
+        // BST (BST-SW Vdiff = 1.5 to 3.5, real 4.5v - 6.5v)
+        BST2_FOVI.Set(FV, i, FOVI_5V, FOVI_10MA, RELAY_ON);
+        delay_us(300);
+        FB_FOVI.MeasureVI(10, 5);
+        delay_us(300);
+        TMPV[site] = FB_FOVI.GetMeasResult(site, MVRET);
+        if (TMPV[site] > float(4.8)) {
+          flag[site] = 1;
+          BST2_FOVI.MeasureVI(10, 5);
+          // BSTOK_ON[site] = BST2_FOVI.GetMeasResult(site, MVRET);
+          BSTOK_ON[site] = float(i);
+        }
+        i += step_v;
+      }
+    if (flag[0] && flag[1] && flag[2] && flag[3]) break;
+  }
 	FreshSiteFlagInit();
 	// ************************************** BSTOK_OFF **************************************
 	// ************************************** BSTOK_OFF **************************************
 	// ************************************** BSTOK_OFF **************************************
-	for(site = 0; site < SITENUM; site++)	{
-		for(i = 3.5f; i >= 1.5f;)	{
-			BST2_FOVI.Set(FV, i, FOVI_10V, FOVI_10MA, RELAY_ON);
- 			delay_us(300);
-			FB_FOVI.MeasureVI(20, 10);
-			TMPV[site] = FB_FOVI.GetMeasResult(site, MVRET);
-			if(TMPV[site] < float(0.3))	{
-				flag[site] = 1;
-				BST2_FOVI.MeasureVI(20, 10);
-				BSTOK_OFF[site] = BST2_FOVI.GetMeasResult(site, MVRET);
-			}
-			i += -step_v;
-			if(flag[0] && flag[1] && flag[2] && flag[3])
-				break;
-		}
-	}
+  for (i = 3.5f; i >= 1.5f;) {
+    for (site = 0; site < SITENUM; site++)  if (!flag[site]) {
+        BST2_FOVI.Set(FV, i, FOVI_10V, FOVI_10MA, RELAY_ON);
+        delay_us(300);
+        FB_FOVI.MeasureVI(20, 10);
+        TMPV[site] = FB_FOVI.GetMeasResult(site, MVRET);
+        if (TMPV[site] < float(0.3)) {
+          flag[site] = 1;
+          BST2_FOVI.MeasureVI(20, 10);
+          // BSTOK_OFF[site] = BST2_FOVI.GetMeasResult(site, MVRET);
+          BSTOK_OFF[site] = float(i);
+        }
+        i += -step_v;
+      }
+    if (flag[0] && flag[1] && flag[2] && flag[3]) break;
+  }
   for(site = 0; site < SITENUM; site++) {
 		BSTOK_HYSV[site] = BSTOK_ON[site] - BSTOK_OFF[site];
 		BSTOK_HIGH  ->SetTestResult(site, 0, BSTOK_ON[site]);

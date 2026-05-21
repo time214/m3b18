@@ -1,8 +1,8 @@
 [SiteSettings]
 Site1=1
-Site2=0
-Site3=0
-Site4=0
+Site2=1
+Site3=1
+Site4=1
 [TestControl]
 FailStop=1
 EnableNewAlarm=0

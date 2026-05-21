@@ -2,20 +2,20 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{ac63bb00-8823-457f-b76f-cb42caee84e9}</UniqueIdentifier>
+      <UniqueIdentifier>{492ce00e-f92d-45b6-9304-6e79b67ee36d}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{d39070e4-3767-4ee9-a9de-36b6f3ea593a}</UniqueIdentifier>
+      <UniqueIdentifier>{75c074f2-e47f-46df-af54-085250782737}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{7640bb3a-8429-47d0-bacd-4e59ef6d657d}</UniqueIdentifier>
+      <UniqueIdentifier>{05b7f26d-d12e-4000-b0e5-f94c6705a159}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MT8992NSLR_XB18_00_FT_EWT.cpp">
+    <ClCompile Include="MT8992ASLR_XB18_00_FT_EWT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StdAfx.cpp">
