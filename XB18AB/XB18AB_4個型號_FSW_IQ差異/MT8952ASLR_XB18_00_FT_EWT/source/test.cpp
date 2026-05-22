@@ -1447,8 +1447,8 @@ DUT_API int Switching1(short funcindex, LPCTSTR funclabel)	{
 	qtmu0.SetStartInput(QTMU_PLUS_IMPEDANCE_1M, QTMU_PLUS_VRNG_5V, QTMU_PLUS_FILTER_1MHz);
   //qtmu0.SetStartTrigger(float(1.0), QTMU_PLUS_NEG_SLOPE);//AA
   //qtmu0.SetStopTrigger(float(0.8), QTMU_PLUS_POS_SLOPE);//AA
-	qtmu0.SetStartTrigger(float(0.8), QTMU_PLUS_NEG_SLOPE);//AB, 260320-5 modified
-  qtmu0.SetStopTrigger(float(0.6), QTMU_PLUS_POS_SLOPE);//AB, 260320-5 modified
+	qtmu0.SetStartTrigger(float(0.85), QTMU_PLUS_NEG_SLOPE);//AB, 260320-5 modified, 0.8
+  qtmu0.SetStopTrigger(float(0.65), QTMU_PLUS_POS_SLOPE);//AB, 260320-5 modified,0.6
   qtmu0.SetInSource(QTMU_PLUS_SINGLE_SOURCE);
 	delay_ms(1);
 
@@ -1880,7 +1880,7 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 
         VinFPVI0.MeasureVI(100, 10);
         ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
-        if ((ICC[site] < float(800e-6f)) && flag[site] == 0) {
+        if ((ICC[site] < float(1000e-6f)) && flag[site] == 0) {//800e-6
           EnFOVI.MeasureVI(30, 10);
           // VEN_OFF[site] = EnFOVI.GetMeasResult(site, MVRET);
           VEN_OFF[site] = float(vf);
@@ -1896,25 +1896,25 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 	// ************************************** IEN(2V) **************************************
 	// EN = 2
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_10MA, RELAY_ON);
-	delay_ms(1);
+	delay_ms(10);
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_1MA, RELAY_ON);
 	delay_ms(1);
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
-	delay_ms(10);
-	EnFOVI.MeasureVI(100, 5);
+	delay_ms(1);
+	EnFOVI.MeasureVI(100, 10);
 	for(site = 0; site < SITENUM; site++)
-		IEN1H[site] = EnFOVI.GetMeasResult(site, MIRET, MAX_RESULT);
+		IEN1H[site] = EnFOVI.GetMeasResult(site, MIRET);//, MAX_RESULT);
 	// ************************************** IEN(0V) **************************************
 	// ************************************** IEN(0V) **************************************
 	// ************************************** IEN(0V) **************************************
 	// EN = 0
 	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_1MA, RELAY_ON);
-	delay_ms(1);
-	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
 	delay_ms(10);
+	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
+	delay_ms(1);
 	EnFOVI.MeasureVI(100, 10);
 	for(site = 0; site < SITENUM; site++)	{
-    IEN2L[site] = EnFOVI.GetMeasResult(site, MIRET, MAX_RESULT);
+    IEN2L[site] = EnFOVI.GetMeasResult(site, MIRET);//, MAX_RESULT);
 		VENH	->SetTestResult(site, 0, VEN_ON[site]);
 		VNEL	->SetTestResult(site, 0, VEN_OFF[site]);
 		VENHYS->SetTestResult(site, 0, (VEN_ON[site] - VEN_OFF[site])*1e3);

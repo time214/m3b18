@@ -1875,7 +1875,7 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 
         VinFPVI0.MeasureVI(100, 10);
         ICC[site] = VinFPVI0.GetMeasResult(site, MIRET, MAX_RESULT);
-        if ((ICC[site] < float(800e-6f)) && flag[site] == 0) {
+        if ((ICC[site] < float(1000e-6f)) && flag[site] == 0) {  // 800e-6
           EnFOVI.MeasureVI(30, 10);
           // VEN_OFF[site] = EnFOVI.GetMeasResult(site, MVRET);
           VEN_OFF[site] = float(vf);
@@ -1891,25 +1891,25 @@ DUT_API int FuncEN1(short funcindex, LPCTSTR funclabel)	{
 	// ************************************** IEN(2V) **************************************
 	// EN = 2
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_10MA, RELAY_ON);
-	delay_ms(1);
+	delay_ms(10);
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_1MA, RELAY_ON);
 	delay_ms(1);
 	EnFOVI.Set(FV, float(2.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
-	delay_ms(10);
+	delay_ms(1);
 	EnFOVI.MeasureVI(100, 5);
 	for(site = 0; site < SITENUM; site++)
-		IEN1H[site] = EnFOVI.GetMeasResult(site, MIRET, MAX_RESULT);
+		IEN1H[site] = EnFOVI.GetMeasResult(site, MIRET);  //, MAX_RESULT);
 	// ************************************** IEN(0V) **************************************
 	// ************************************** IEN(0V) **************************************
 	// ************************************** IEN(0V) **************************************
 	// EN = 0
 	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_1MA, RELAY_ON);
-	delay_ms(1);
-	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
 	delay_ms(10);
+	EnFOVI.Set(FV, float(0.0), FOVI_5V,	FOVI_10UA, RELAY_ON);
+	delay_ms(1);
 	EnFOVI.MeasureVI(100, 10);
 	for(site = 0; site < SITENUM; site++)	{
-    IEN2L[site] = EnFOVI.GetMeasResult(site, MIRET, MAX_RESULT);
+    IEN2L[site] = EnFOVI.GetMeasResult(site, MIRET);  //, MAX_RESULT);
 		VENH	->SetTestResult(site, 0, VEN_ON[site]);
 		VNEL	->SetTestResult(site, 0, VEN_OFF[site]);
 		VENHYS->SetTestResult(site, 0, (VEN_ON[site] - VEN_OFF[site])*1e3);
